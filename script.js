@@ -4,9 +4,6 @@
 //     skycons.play();
 // });
 // icon start
-const icon = new Skycons({color : '#43AFFC'});
-icon.set('icon', 'rain')
-icon.play()
 // icon end
 // const all
 const inputCity = document.querySelector("input");
@@ -15,6 +12,7 @@ const wrapper = document.querySelector(".wrapper");
 const inputPart = document.querySelector(".input-part");
 const locationBtn = document.querySelector("button");
 const back = document.querySelector("header i");
+const wIcon = document.querySelector(".weather-part img");
 let key = '9c7ef7eabe90688b0faf867cee3695bb';
 let api;
 // City Enter
@@ -66,6 +64,21 @@ function weatherDetails(info){
         const {feels_like, humidity, temp} = info.main;
         const dt = new Date(info.dt*1000);
         const {speed, deg} = info.wind;
+
+        if(id==800){
+            wIcon.src =  "animated/day.svg";
+        }else if(id >= 200 && id <= 232){
+            wIcon.src =  "animated/thuder.svg"; 
+        }else if(id >= 600 && id <= 622){
+            wIcon.src =  "animated/snowy-6.svg"; 
+        }else if(id >= 701 && id <= 781){
+            wIcon.src =  "animated/cloudy.svg"; 
+        }else if(id >= 801 && id <= 804){
+            wIcon.src =  "animated/cloudy-day-1.svg"; 
+        }else if((id >= 300 && id <= 321) || (id >= 500 && id <=531)){
+            wIcon.src =  "animated/rainy-6.svg"; 
+        }
+
         wrapper.querySelector(".weather-part .baru").innerHTML=`${dt.toDateString()}`
         wrapper.querySelector(".temp .numb").innerHTML =Math.floor(temp) ;
         wrapper.querySelector(".weather").innerHTML = description;
